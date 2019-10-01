@@ -12,7 +12,7 @@ class App extends Component {
         <p>this is really working</p>
         <Person name='Max' age='10'/>
         <Person name='Manu' age='30'/>
-        <Person name='Steph' age='60'>Hobbies is basketball</Person>
+        <Person name='Steph' age='60'>Pro in basketball</Person>
         <Person name='somil' age='20'/>
       </div>
     );
