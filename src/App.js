@@ -7,33 +7,29 @@ class App extends Component {
 
   state = {
     persons: [
-      {name: 'Max', age: 28},
-      {name: 'Manu', age: 16},
-      {name: 'Steph', age: 34}
+      {id: 'sadw', name: 'Max', age: 28},
+      {id: 'aasd', name: 'Manu', age: 16},
+      {id: 'wvxc', name: 'Steph', age: 34}
     ],
     otherState: 'some other state',
     showData: false
   };
 
-  switchNameHandler = (newName) => {
-    //console.log('was clicked');
-    this.setState({
-      persons: [
-        {name: newName, age: 8},
-        {name: 'Chnaged-Manu', age: 6},
-        {name: 'Chnaged-Steph', age: 60},
-      ]
-    });
+  deletePersonHandler = (index) => {
+    const persons = [...this.state.persons];
+    persons.splice(index, 1);
+    this.setState({persons: persons});
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        {name: 'Max', age: 28},
-        {name: event.target.value, age: 16},
-        {name: 'Steph', age: 34}
-      ]
-    });
+  nameChangedHandler = (event, personIndx) => {
+    //const personIndx = this.state.persons.findIndex((person) => person.id === id);
+    const person = {
+      ...this.state.persons[personIndx]
+    };
+    person.name = event.target.value;    
+    const persons = [...this.state.persons];
+    persons[personIndx] = person;
+    this.setState({persons: persons});
   }
 
   togglePerson = () => {
@@ -56,7 +52,16 @@ class App extends Component {
     if(this.state.showData) {
       persons = (
         <div>
-          <Person 
+          {this.state.persons.map((person, indx) => {
+              return (
+                <Person key={person.id}
+                  click= {() => this.deletePersonHandler(indx)}
+                  changed= {(event) => this.nameChangedHandler(event, indx)}
+                  name={person.name} 
+                  age={person.age}/>
+              )
+          })}
+          {/* <Person 
             name={this.state.persons[0].name} 
             age={this.state.persons[0].age}/>
           <Person 
@@ -66,7 +71,7 @@ class App extends Component {
             changed={this.nameChangedHandler}> I am a basketball pro </Person>
           <Person 
             name={this.state.persons[2].name} 
-            age={this.state.persons[2].age}/>
+            age={this.state.persons[2].age}/> */}
         </div>
       )
     }
