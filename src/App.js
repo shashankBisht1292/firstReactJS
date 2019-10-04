@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import Person from './Person/Person';
 
 class App extends Component {
@@ -41,7 +40,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -61,32 +61,23 @@ class App extends Component {
                   age={person.age}/>
               )
           })}
-          {/* <Person 
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age}/>
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, 'shashank')}
-            changed={this.nameChangedHandler}> I am a basketball pro </Person>
-          <Person 
-            name={this.state.persons[2].name} 
-            age={this.state.persons[2].age}/> */}
         </div>
       )
+      style.backgroundColor = 'red';
     }
+
+    let classes = ['red', 'bold']. join(' ');
 
     return (
       <div className="App">
         <h1>Hi, I'm a react app !</h1>
-        <p>this is really working</p>
+        <p className= {this.state.persons.length <3 ? classes : null}>this is really working</p>
         <button 
           style={style} 
           onClick={this.togglePerson}>Switch Name</button>
         {persons}
       </div>
     );
-    // return React.createElement('div', {className: 'App'}, 'h1', 'Hi, I\'m areact app!!!');
   }
 }
 
